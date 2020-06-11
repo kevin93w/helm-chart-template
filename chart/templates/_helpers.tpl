@@ -5,10 +5,6 @@
   kind: Ingress
   metadata:
     name: {{ .service.name }}
-    annotations:
-      nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
-      nginx.ingress.kubernetes.io/configuration-snippet: |
-        more_clear_headers "Server";
   spec:
     rules:
     - host: {{ .service.host }}
