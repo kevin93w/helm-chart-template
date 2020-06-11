@@ -16,5 +16,54 @@ helm-template.bat - This performs a dry run of the Helm chart and outputs the Ku
 This template helps you to make use of Helm more easily. 
 1. Copy the contents of this repository into your own project.
 2. Update the namespaces in the .bat scripts.
-3. Update the Values.development.yaml variables.
+3. Update the Values.development.yaml by adding the services you would like to deploy and updating the variables.
 4. Run the project or template by using any of the .bat files.
+
+## Supported Kubernetes components
+The most basic K8S components are supported, and perhaps I'll add more in the feauture.
+
+#### Global Options
+Next to component specific options, there are also some global variables you can set in the Values.yaml file:
+- global.environment: The name of the running environment (default "development")
+- global.pullPolicy: Defines the pulling strategy when you update your containers
+- global.pullSecret: Optional pull secret within your namespace that should be used when fetching the container images from the registry
+
+### Deployment
+The deployments enables you to enroll your containers.
+
+#### Options
+- service.name: The name of your deployment, this will match the name of the service
+- service.image: The base image name
+- service.version: The version of the image you would like to deploy
+- service.args: An array containing your arguments as strings
+- service.env: A list containing your environment variables, every variable should contain a key value pair
+- service.ports.internal: The internal port of your container
+- service.ports.external: The external port of your container
+- service.resources.cpu.request: The CPU request of your container
+- service.resources.cpu.limit: The CPU limit of your container
+- service.resources.memory.request: The memory request of your container
+- service.resources.memory.limit: The memory limit of your container
+
+### Service
+The service component makes your deployment available to other containers.
+
+#### Options
+- service.name: The name of your service, this will match the name of the deployment
+- service.ports.internal: The internal port of your container
+
+### NodePort
+In a development environment, it could be desirable to add a NodePort to your service. This will make it available from your local browser. If you change your environment to anything else than "development", this will not be bound to your deployment.
+
+#### Options
+- service.name: The name of your service, this will match the name of the deployment
+- service.ports.internal: The internal port of your container
+- service.ports.external: The external port of your container
+- service.ports.node: The NodePort port that you will use to access the container from your browser, this must be >30000.
+
+### Ingress
+To make your service available through a hostname, you can add a Ingress router to it. This will not work in the development environment. If you change your environment to anything else than "development", this will be bound to your deployment.
+
+#### Options
+- service.name: The name of your service, this will match the name of the deployment
+- service.host: The hostname of your service, that will be used to access the service
+- service.ports.external: The external port of your container
