@@ -19,9 +19,9 @@ services:
       mem:
         request: 64M
         limit: 64M
-    args: "['--argument-1-key', 'argument-1-value', '--argument-2-key', 'argument-2-value']"
+    args: "['--<argument-1-key>', '<argument-1-value>', '--<argument-2-key>', '<argument-2-value>']"
     env:
-      - name: environment_variable_1_key
-        value: environment_variable_1_value
-      - name: environment_variable_2_key
-        value: environment_variable_2_value
+      - name: <environment_variable_1_key>
+        value: <environment_variable_1_value>
+      - name: <environment_variable_2_key>
+        value: <environment_variable_2_value>
