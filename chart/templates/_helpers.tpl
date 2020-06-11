@@ -114,6 +114,8 @@
             limits:
               cpu: {{ .service.resources.cpu.limit }}
               memory: {{ .service.resources.mem.limit }}
+        {{- if (.global.pullSecret) -}}
         imagePullSecrets:
         - name: {{ .global.pullSecret }}
+        {{end -}}
 {{end -}}
