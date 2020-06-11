@@ -67,3 +67,35 @@ To make your service available through a hostname, you can add a Ingress router 
 - service.name: The name of your service, this will match the name of the deployment
 - service.host: The hostname of your service, that will be used to access the service
 - service.ports.external: The external port of your container
+
+#### Example
+#### Example
+```
+global:
+  environment: development
+  pullPolicy: Always
+  pullSecret: <pull-secret-name>
+
+services:
+  example:
+    name: "example"
+    image: "nginx"
+    version: "latest"
+    ports:
+      internal: 80
+      external: 80
+      node: 30001
+    resources:
+      cpu:
+        request: 0.1
+        limit: 1.0
+      mem:
+        request: 64M
+        limit: 64M
+    args: "['--<argument-1-key>', '<argument-1-value>', '--<argument-2-key>', '<argument-2-value>']"
+    env:
+      - name: <environment_variable_1_key>
+        value: <environment_variable_1_value>
+      - name: <environment_variable_2_key>
+        value: <environment_variable_2_value>
+```
