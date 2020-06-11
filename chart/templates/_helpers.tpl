@@ -83,8 +83,6 @@
           name: {{ .service.name }}
           args: {{ .service.args }}
           env:
-          - name: NODE_ENVIRONMENT
-            value: {{ .global.environment }}
           {{- range .service.env }}
           - name: {{ .name }}
             value: "{{ .value }}"
