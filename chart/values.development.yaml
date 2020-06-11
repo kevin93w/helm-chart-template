@@ -1,0 +1,27 @@
+global:
+  environment: development
+  pullPolicy: Always
+  pullSecret: <pull-secret-name>
+
+services:
+  example-service:
+    name: "example-service"
+    image: "nginx"
+    version: "latest"
+    ports:
+      internal: 80
+      external: 80
+      node: 30001
+    resources:
+      cpu:
+        request: 0.1
+        limit: 1.0
+      mem:
+        request: 64M
+        limit: 64M
+    args: "['--argument-1-key', 'argument-1-value', '--argument-2-key', 'argument-2-value']"
+    env:
+      - name: environment_variable_1_key
+        value: environment_variable_1_value
+      - name: environment_variable_2_key
+        value: environment_variable_2_value

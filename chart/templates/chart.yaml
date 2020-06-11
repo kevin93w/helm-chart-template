@@ -1,0 +1,14 @@
+{{- with .Values -}}
+{{- $global := .global -}}
+
+apiVersion: v1
+items:
+{{- range .services -}}
+{{ $vars := (dict "global" $global "service" .) }}
+{{ include "templates.service" $vars }}
+{{ include "templates.ingress" $vars }}
+{{ include "templates.nodeport" $vars }}
+{{ include "templates.deployment" $vars }}
+{{- end -}}
+kind: List
+{{- end -}}
