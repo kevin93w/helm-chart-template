@@ -68,8 +68,7 @@ To make your service available through a hostname, you can add a Ingress router 
 - service.host: The hostname of your service, that will be used to access the service
 - service.ports.external: The external port of your container
 
-#### Example
-#### Example
+#### Example Values.<environment>.yaml
 ```
 global:
   environment: development
